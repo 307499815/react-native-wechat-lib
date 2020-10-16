@@ -290,7 +290,7 @@
 			projectRoot = "";
 			targets = (
 				86D238411BD0BB9E00C75D01 /* RCTWeChat */,
-				10D6D7A31F160C250066F0F3 /* RCTWeChatTests */,
+				/* 10D6D7A31F160C250066F0F3 RCTWeChatTests */,
 			);
 		};
 /* End PBXProject section */
