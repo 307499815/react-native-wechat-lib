@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 
-import androidx.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.common.internal.Files;
@@ -229,7 +229,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
     public void shareImage(final ReadableMap data, final Callback callback) {
         this._getImage(Uri.parse(data.getString("imageUrl")), null, new ImageCallback() {
             @Override
-            public void invoke(@Nullable Bitmap bitmap) {
+            public void invoke(@NonNull Bitmap bitmap) {
                 Bitmap bmp = bitmap;
                 int maxWidth = data.hasKey("maxWidth") ? data.getInt("maxWidth") : -1;
                 if (maxWidth > 0) {
@@ -339,7 +339,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         if (data.hasKey("thumbImageUrl")) {
             this._getImage(Uri.parse(data.getString("thumbImageUrl")), null, new ImageCallback() {
                 @Override
-                public void invoke(@Nullable Bitmap bmp) {
+                public void invoke(@NonNull Bitmap bmp) {
                     // 设置缩略图
                     if (bmp != null) {
                         msg.thumbData = bitmapResizeGetBytes(bmp, THUMB_SIZE);
@@ -382,7 +382,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         if (data.hasKey("thumbImageUrl")) {
             this._getImage(Uri.parse(data.getString("thumbImageUrl")), null, new ImageCallback() {
                 @Override
-                public void invoke(@Nullable Bitmap bmp) {
+                public void invoke(@NonNull Bitmap bmp) {
                     // 设置缩略图
                     if (bmp != null) {
                         msg.thumbData = bitmapResizeGetBytes(bmp, THUMB_SIZE);
@@ -424,7 +424,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         if (data.hasKey("thumbImageUrl")) {
             this._getImage(Uri.parse(data.getString("thumbImageUrl")), null, new ImageCallback() {
                 @Override
-                public void invoke(@Nullable Bitmap bmp) {
+                public void invoke(@NonNull Bitmap bmp) {
                     // 设置缩略图
                     if (bmp != null) {
                         msg.thumbData = bitmapResizeGetBytes(bmp, THUMB_SIZE);
@@ -474,7 +474,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         if (thumbImageUrl != null && !thumbImageUrl.equals("")) {
             this._getImage(Uri.parse(thumbImageUrl), null, new ImageCallback() {
                 @Override
-                public void invoke(@Nullable Bitmap bmp) {
+                public void invoke(@NonNull Bitmap bmp) {
                     // 小程序消息封面图片，小于128k
                     if (bmp != null) {
                         msg.thumbData = bitmapResizeGetBytes(bmp, 128);
@@ -602,7 +602,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         if (uri != null) {
             this._getImage(uri, new ResizeOptions(100, 100), new ImageCallback() {
                 @Override
-                public void invoke(@Nullable Bitmap bitmap) {
+                public void invoke(@NonNull Bitmap bitmap) {
                     WeChatModule.this._share(scene, data, bitmap, callback);
                 }
             });
@@ -680,7 +680,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         } else if (type.equals("imageUrl") || type.equals("imageResource")) {
             __jsonToImageUrlMedia(data, new MediaObjectCallback() {
                 @Override
-                public void invoke(@Nullable WXMediaMessage.IMediaObject mediaObject) {
+                public void invoke(@NonNull WXMediaMessage.IMediaObject mediaObject) {
                     if (mediaObject == null) {
                         callback.invoke(INVALID_ARGUMENT);
                     } else {
@@ -692,7 +692,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         } else if (type.equals("imageFile")) {
             __jsonToImageFileMedia(data, new MediaObjectCallback() {
                 @Override
-                public void invoke(@Nullable WXMediaMessage.IMediaObject mediaObject) {
+                public void invoke(@NonNull WXMediaMessage.IMediaObject mediaObject) {
                     if (mediaObject == null) {
                         callback.invoke(INVALID_ARGUMENT);
                     } else {
@@ -790,7 +790,7 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
 
         this._getImage(imageUri, null, new ImageCallback() {
             @Override
-            public void invoke(@Nullable Bitmap bitmap) {
+            public void invoke(@NonNull Bitmap bitmap) {
                 callback.invoke(bitmap == null ? null : new WXImageObject(bitmap));
             }
         });
@@ -903,11 +903,11 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
     }
 
     private interface ImageCallback {
-        void invoke(@Nullable Bitmap bitmap);
+        void invoke(@NonNull Bitmap bitmap);
     }
 
     private interface MediaObjectCallback {
-        void invoke(@Nullable WXMediaMessage.IMediaObject mediaObject);
+        void invoke(@NonNull WXMediaMessage.IMediaObject mediaObject);
     }
 
 }
